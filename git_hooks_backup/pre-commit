@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Get a list of all directories in the project, excluding .git
+directories=$(find . -type d -not -path '*/.*')
+
+for dir in $directories; do
+    # Check if README.md exists in the directory (case insensitive)
+    if [ ! -f "$dir/README.md" ] && [ ! -f "$dir/readme.md" ]; then
+        echo "Error: Directory '$dir' does not contain a README.md file."
+        echo "Commit aborted."
+        exit 1
+    fi
+done
+
+exit 0
